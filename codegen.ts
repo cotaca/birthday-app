@@ -13,7 +13,7 @@ const config: CodegenConfig = {
     ],
     documents: ['src/**/*.{ts,tsx}'],
     generates: {
-        './src/__generated__/': {
+        './src/graphql/__generated__/': {
             preset: 'client',
             plugins: [
                 {

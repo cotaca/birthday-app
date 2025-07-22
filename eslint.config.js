@@ -9,7 +9,7 @@ import { globalIgnores } from 'eslint/config'
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config([
-  globalIgnores(['dist', 'src/__generated__/', 'codegen.ts', 'src/main.tsx']),
+  globalIgnores(['dist', 'src/graphql/__generated__/', 'codegen.ts', 'src/main.tsx']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

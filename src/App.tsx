@@ -1,36 +1,6 @@
 import './App.css';
 import { useQuery } from '@apollo/client';
-
-import { gql } from './__generated__';
-
-const GET_BIRTHDAY_CHARACTERS = gql(/* GraphQL */ `
-  query GetBirthdayCharacters($page: Int = 1) {
-    Page(page: $page) {
-      pageInfo {
-        hasNextPage
-      }
-      characters(isBirthday: true) {
-        id
-        name {
-          full
-        }
-        age
-        gender
-        image {
-          large
-        }
-        media {
-          nodes {
-            title {
-              romaji
-              english
-            }
-          }
-        }
-      }
-    }
-  }
-`);
+import { GET_BIRTHDAY_CHARACTERS } from './graphql/operations/GetBirthdayCharacters.ts';
 
 function App() {
   const { loading, error, data } = useQuery(GET_BIRTHDAY_CHARACTERS);
