@@ -22,8 +22,8 @@ function App() {
 
   return (
     <>
-      <h1>{currentDate.toLocaleDateString()}</h1>
-      <h2>Herzlichen Glückwunsch!</h2>
+      <h1>Heute ist der {currentDate.toLocaleDateString()}</h1>
+      <h2>Herzlichen Glückwunsch an {characters.length} Charaktere!</h2>
       {characters.map((character) => {
         const mediaNodes = character.media?.nodes ?? [];
         const origin = mediaNodes.map(
