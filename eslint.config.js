@@ -6,9 +6,10 @@ import reactDom from 'eslint-plugin-react-dom'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { globalIgnores } from 'eslint/config'
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config([
-  globalIgnores(['dist', 'src/__generated__/']),
+  globalIgnores(['dist', 'src/__generated__/', 'codegen.ts', 'src/main.tsx']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -19,6 +20,7 @@ export default tseslint.config([
       reactX.configs['recommended-typescript'],
       reactDom.configs.recommended,
       reactRefresh.configs.vite,
+      eslintConfigPrettier,
     ],
     languageOptions: {
       parserOptions: {

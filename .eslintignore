@@ -1,4 +1,0 @@
-dist
-
-# Ignore generated GraphQL types
-src/__generated__/
