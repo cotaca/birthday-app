@@ -6,6 +6,8 @@ import {
   type CharacterFromQuery,
   isValid,
 } from './graphql/helpers/birthdayCharacters.ts';
+import { Box, Typography, Link } from '@mui/material';
+import Portrait from './components/Portrait/Portrait.tsx';
 
 function App() {
   const { loading, error, data } = useQuery<GetBirthdayCharactersQuery>(
@@ -21,48 +23,52 @@ function App() {
   const currentDate = new Date();
 
   return (
-    <>
-      <h1>Heute ist der {currentDate.toLocaleDateString()}</h1>
-      <h2>Herzlichen Glückwunsch an {characters.length} Charaktere!</h2>
-      {characters.map((character) => {
-        const mediaNodes = character.media?.nodes ?? [];
-        const origin = mediaNodes.map(
-          (node) => node?.title?.romaji ?? 'Unbekannt'
-        );
-
-        return (
-          <div
-            key={character.id}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              padding: 5,
-            }}
-          >
-            <div>
-              <h2>{character.name?.full ?? 'Unbekannt'}</h2>
-              <p>
-                <b>Alter:</b> {character.age ?? 'Unbekannt'}
-              </p>
-              <p>
-                <b>Geschlecht:</b> {character.gender ?? 'Unbekannt'}
-              </p>
-              <p>
-                <b>Herkunft:</b> {origin.join(', ')}
-              </p>
-            </div>
-            {character.image?.large && (
-              <img
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 1,
+      }}
+    >
+      <Typography variant={'h6'}>Heute ist der</Typography>
+      <Typography variant={'h2'} sx={{ fontWeight: 'bold' }}>
+        {currentDate.toLocaleDateString()}
+      </Typography>
+      <Typography variant={'h6'}>
+        Herzlichen Glückwunsch an {characters.length} Charaktere!
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          pt: 2,
+          gap: 2,
+        }}
+      >
+        {characters
+          .filter(
+            (
+              character
+            ): character is typeof character & { image: { large: string } } =>
+              !!character.image?.large
+          )
+          .map((character) => (
+            <Link
+              key={character.id}
+              target={'_blank'}
+              href={`https://anilist.co/character/${String(character.id)}/${character.name?.full?.replaceAll(' ', '-') ?? ''}`}
+              underline={'none'}
+            >
+              <Portrait
                 src={character.image.large}
-                alt={`Image of ${character.name?.full ?? 'an unknown character'}`}
-                width={160}
+                alt={'Character Portrait'}
+                label={character.name?.full ?? 'Unbekannt'}
               />
-            )}
-          </div>
-        );
-      })}
-    </>
+            </Link>
+          ))}
+      </Box>
+    </Box>
   );
 }
 
