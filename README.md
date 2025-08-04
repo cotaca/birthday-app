@@ -1,2 +1,2 @@
 # birthday-app
-This is a personal React project for practice. It is a site that displays popular anime characters that currently celebrate their birthday.
+This is a personal [React](https://react.dev/learn) project for practice. It is a site that displays popular anime characters that currently celebrate their birthday using the [GraphQL](https://graphql.org/learn/) API of [AniList.co](https://docs.anilist.co/guide/introduction).
